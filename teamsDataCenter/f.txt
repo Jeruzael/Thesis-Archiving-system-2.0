@@ -1,0 +1,11 @@
+ if(isset($_POST['profLogin'])){   $profemail = mysqli_real_escape_string($connect, $_POST['profEmail']);
+          $profpassword = mysqli_real_escape_string($connect, $_POST['profPassword']); $searchEmail = mysqli_query($connect, "SELECT * FROM teamsprof WHERE profEmail = '$profemail'");
+          if(mysqli_num_rows($searchEmail) > 0){
+            $profInfo = mysqli_fetch_assoc($searchEmail);
+            $profEmail = $profInfo['profEmail']; $profPW = $profInfo['profPassword'];
+           if(password_verify($profpassword, $profPW)){
+              $_SESSION['profemail'] = $profemail;
+              $_SESSION['profnumber'] = $profNum;
+              echo "yehey";
+              header('location: dashboard.php');
+              exit();
